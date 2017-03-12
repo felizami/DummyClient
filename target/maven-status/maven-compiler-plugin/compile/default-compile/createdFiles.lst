@@ -1,2 +1,4 @@
-com/anuz/dummyclient/controller/HomeController.class
+com/anuz/dummyclient/config/AppConfig.class
+com/anuz/dummyclient/controller/ContentController.class
 com/anuz/dummyclient/DummyClientApplication.class
+com/anuz/dummyclient/controller/HomeController.class
