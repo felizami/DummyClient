@@ -18,7 +18,7 @@
     <body>
         <div class="container">
 
-            <button onclick="syncContents(4)">User4 Sync data</button>
+            <!--<button onclick="syncContents(4)">User4 Sync data</button>-->
             <button onclick="clickMe()" class="btn btn-default">Click Me</button>
 
 
@@ -27,8 +27,12 @@
             <button onclick="checkUpdateStatus(5)" class="btn btn-primary">User 5</button>
 
 
+            
+            
+            
             <div id="display"></div>
-
+            
+            <img src="http://localhost:8080/DummyClient/contents/files/content3/image3">
 
         </div>
 
@@ -36,12 +40,15 @@
 
         <script>
 
-            function checkUpdateStatus(userId) {
-                $.get("http://localhost:8080/DummyAPI/api/v1/users/content_status/" + userId, function (data, status) {
+            function checkUpdateStatus(clientId) {
+                $.get("http://localhost:8080/DummyAPI/api/v1/users/content_status/" + clientId, function (data, status) {
+                    console.log(data);
+                    console.log(status);
                     if (data.status) {
-                        $("#display").append("<br>" + "User" + userId + " is up to date");
+                        $("#display").append("<br>" + "User" + clientId + " has new updates");
                     } else {
-                        $("#display").append("<br>" + "User" + userId + " has new updates");
+
+                        $("#display").append("<br>" + "User" + clientId + " is up to date");
                     }
                 });
             }
@@ -53,21 +60,8 @@
                 });
             }
 
-            function syncContents(id) {
-                $.get("http://localhost:8080/DummyAPI/api/v1/users/contents_file/"+id,function(data){
-                    
-                    $.ajax({
-                            url: 'http://localhost:8080/DummyClient/contents/unzip',
-                            type: 'post',
-                            contentType: 'application/json',
-                            data: JSON.stringify({"files":data})
-                          
-                        });
-//                   console.log(data); 
-                });
-            }
-
-//                JSZipUtils.getBinaryContent("http://localhost:8080/DummyAPI/api/v1/users/contents_file/" + 4, function (err, data) {
+//            function syncContents(id) {
+//                JSZipUtils.getBinaryContent("http://localhost:8080/DummyAPI/api/v1/users/contents_file/" + id, function (err, data) {
 //                    if (err) {
 //                        throw err; // or handle err
 //                    }
@@ -75,43 +69,54 @@
 //                        alert("No Updates");
 //                        return;
 //                    }
-//                    
+//
 //                    console.log(data);
-//
-//                    JSZip.loadAsync(data).then(function (contents) {
-//                         
-//                        $.ajax({
-//                            url: 'http://localhost:8080/DummyClient/contents/unzip',
-//                            type: 'post',
-//                            contentType: 'application/json',
-//                            data: JSON.stringify(contents)
-//                          
+//                    
+//                    
+//                    JSZip.loadAsync(data).then(function (zipFile) {
+//                        var re = /(.jpg|.png|.gif|.ps|.jpeg)$/;
+//                        var promises = Object.keys(zipFile.files).filter(function (fileName) {
+//                            // don't consider non image files
+//                            console.log(fileName);
+////                            console.log(re.test(fileName.toLowerCase()));
+//                            return re.test(fileName.toLowerCase());
+//                        }).map(function (fileName) {
+//                            
+//                            var file = zipFile.files[fileName];
+//                            return file.async("string").then(function (blob) {
+//                                return [
+//                                    fileName, // keep the link between the file name and the content
+//                                    blob // create an url. img.src = URL.createObjectURL(...) will work
+//                                ];
+//                            });
 //                        });
-//
-//
-//                        //                        
-////                        $.ajax({
-////                            type: "POST",
-////                            url: "http://localhost:8080/DummyClient/contents/unzip",
-////                            data: dataset,
-////                            dataType: "application/json"
+//                        
+//                        // `promises` is an array of promises, `Promise.all` transforms it
+//                        // into a promise of arrays
+//                        console.log("promises");
+//                        console.log(promises);
+//                        
+//                        return Promise.all(promises);
+//                    }).then(function (result) {
+//                        console.log("Check");
+//                            
+////                        $.post("http://localhost:8080/DummyClient/contents/unzip",{"files":result},function(){
+////                            
 ////                        });
-////                        
-//
-////                        
-//
-////                        console.log(contents);
-////                        console.log(contents.files);
-////                        Object.keys(contents.files).forEach(function (filename) {
-////                            contents.files[filename].async('string').then(function (fileData) {
-////                                
-////                                
-////                                console.log(fileData); // These are your file contents      
-////                            });
-////                        });
-//
-//
+//                        // we have here an array of [fileName, url]
+//                        // if you want the same result as imageSrc:
+////                        return result.reduce(function (acc, val) {
+////                            acc[val[0]] = val[1];
+////                            return acc;
+////                        }, {});
+//                    }).catch(function (e) {
+//                        console.error(e);
 //                    });
+//                    
+//
+//
+//
+//
 //                });
 //            }
 
