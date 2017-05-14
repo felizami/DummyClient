@@ -28,17 +28,34 @@
 
 
             
+            <img src="${pageContext.request.contextPath}/assets/img/hachiko1.jpg" alt=""/>
             
+            <div id="htmlcontent">
+                
+            </div>
+               
             
             <div id="display"></div>
             
-            <img src="http://localhost:8080/DummyClient/contents/files/content3/image3">
+            
+            <img src="">
 
         </div>
 
 
 
         <script>
+            htmlContent(4);
+            
+            function htmlContent(clientId){
+                $.get("http://localhost:8080/DummyAPI/api/v1/users/" + clientId+"/latest", function (data, status) {
+                    console.log(data);
+                    console.log(status);
+                    if (data.status) {
+                        $("#htmlcontent").append(data);
+                    } 
+                });
+            }
 
             function checkUpdateStatus(clientId) {
                 $.get("http://localhost:8080/DummyAPI/api/v1/users/content_status/" + clientId, function (data, status) {
