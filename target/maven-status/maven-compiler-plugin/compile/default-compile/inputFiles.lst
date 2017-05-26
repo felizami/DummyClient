@@ -1,5 +1,7 @@
-/home/anuz/javaworkspace/DummyClient/src/main/java/com/anuz/dummyclient/DummyClientApplication.java
-/home/anuz/javaworkspace/DummyClient/src/main/java/com/anuz/dummyclient/controller/ContentController.java
-/home/anuz/javaworkspace/DummyClient/src/main/java/com/anuz/dummyclient/config/AppConfig.java
-/home/anuz/javaworkspace/DummyClient/src/main/java/com/anuz/dummyclient/controller/HomeController.java
-/home/anuz/javaworkspace/DummyClient/src/main/java/com/anuz/dummyclient/constants/CONSTANT.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/controller/HomeController.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/controller/service/ClientService.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/config/AppConfig.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/DummyClientApplication.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/controller/api/ClientController.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/constants/CONSTANT.java
+/home/anuz/NetBeansProjects/DummyClient/src/main/java/com/anuz/dummyclient/controller/ContentController.java

@@ -12,33 +12,25 @@
         <link href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/jszip.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/jszip-utils.js" type="text/javascript"></script>
+<!--        <script src="${pageContext.request.contextPath}/assets/js/jszip.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jszip-utils.js" type="text/javascript"></script>-->
     </head>
     <body>
         <div class="container">
-
-            <!--<button onclick="syncContents(4)">User4 Sync data</button>-->
-            <button onclick="clickMe()" class="btn btn-default">Click Me</button>
-
-
-            <button onclick="checkUpdateStatus(1)" class="btn btn-primary">User 1</button>
-            <button onclick="checkUpdateStatus(4)" class="btn btn-primary">User 4</button>
-            <button onclick="checkUpdateStatus(5)" class="btn btn-primary">User 5</button>
-
-
-            
-            <img src="${pageContext.request.contextPath}/assets/img/hachiko1.jpg" alt=""/>
+ 
+ 
             
             <div id="htmlcontent">
                 
+                <h1>Initial state!!!!</h1>
+                
             </div>
                
-            
+<!--            
             <div id="display"></div>
             
             
-            <img src="">
+            <img src="">-->
 
         </div>
 
@@ -48,34 +40,35 @@
             htmlContent(4);
             
             function htmlContent(clientId){
-                $.get("http://localhost:8080/DummyAPI/api/v1/users/" + clientId+"/latest", function (data, status) {
-                    console.log(data);
-                    console.log(status);
-                    if (data.status) {
-                        $("#htmlcontent").append(data);
+//                http://192.168.0.112:8080/DummyAPI/api/v1/users/" + clientId+"/html/latest
+
+                $.get("http://localhost:8080/DummyClient/client/html_update/"+clientId, function (data, status) {
+                    
+                    if (data.updates.status) {
+                        $("#htmlcontent").html(data.updates.contentId.contentLocation);
                     } 
                 });
             }
 
-            function checkUpdateStatus(clientId) {
-                $.get("http://localhost:8080/DummyAPI/api/v1/users/content_status/" + clientId, function (data, status) {
-                    console.log(data);
-                    console.log(status);
-                    if (data.status) {
-                        $("#display").append("<br>" + "User" + clientId + " has new updates");
-                    } else {
-
-                        $("#display").append("<br>" + "User" + clientId + " is up to date");
-                    }
-                });
-            }
-
-            function clickMe() {
-
-                $.get("http://localhost:8080/DummyAPI/click_me", function (data, status) {
-                    $("#display").append("<br>" + data.clickMe);
-                });
-            }
+//            function checkUpdateStatus(clientId) {
+//                $.get("http://localhost:8080/DummyAPI/api/v1/users/content_status/" + clientId, function (data, status) {
+//                    console.log(data);
+//                    console.log(status);
+//                    if (data.status) {
+//                        $("#display").append("<br>" + "User" + clientId + " has new updates");
+//                    } else {
+//
+//                        $("#display").append("<br>" + "User" + clientId + " is up to date");
+//                    }
+//                });
+//            }
+//
+//            function clickMe() {
+//
+//                $.get("http://localhost:8080/DummyAPI/click_me", function (data, status) {
+//                    $("#display").append("<br>" + data.clickMe);
+//                });
+//            }
 
 //            function syncContents(id) {
 //                JSZipUtils.getBinaryContent("http://localhost:8080/DummyAPI/api/v1/users/contents_file/" + id, function (err, data) {
